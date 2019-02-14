@@ -1,10 +1,4 @@
-//
-//  AppDelegate.swift
-//  CollectionViewSearchSwift
-//
-//  Created by Vamshi Krishna on 20/04/17.
-//  Copyright © 2017 VamshiKrishna. All rights reserved.
-//
+
 
 import UIKit
 

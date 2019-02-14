@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10276A4C22153ECC00EC38E5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10276A4B22153ECC00EC38E5 /* Model.swift */; };
 		96291BDE1EA87C3A00E002B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96291BDD1EA87C3A00E002B2 /* AppDelegate.swift */; };
 		96291BE01EA87C3A00E002B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96291BDF1EA87C3A00E002B2 /* ViewController.swift */; };
 		96291BE31EA87C3A00E002B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96291BE11EA87C3A00E002B2 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10276A4B22153ECC00EC38E5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		96291BDA1EA87C3A00E002B2 /* CollectionViewSearchSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewSearchSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96291BDD1EA87C3A00E002B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96291BDF1EA87C3A00E002B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				96291BE41EA87C3A00E002B2 /* Assets.xcassets */,
 				96291BE61EA87C3A00E002B2 /* LaunchScreen.storyboard */,
 				96291BE91EA87C3A00E002B2 /* Info.plist */,
+				10276A4B22153ECC00EC38E5 /* Model.swift */,
 			);
 			path = CollectionViewSearchSwift;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 				96291BE01EA87C3A00E002B2 /* ViewController.swift in Sources */,
 				96291BDE1EA87C3A00E002B2 /* AppDelegate.swift in Sources */,
 				96291BF01EA87CD600E002B2 /* CollectionViewCell.swift in Sources */,
+				10276A4C22153ECC00EC38E5 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +272,7 @@
 				DEVELOPMENT_TEAM = BJBC582Q56;
 				INFOPLIST_FILE = CollectionViewSearchSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = VamshiKrishna.CollectionViewSearchSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = VamshiKrishna.CollectionViewSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -281,7 +285,7 @@
 				DEVELOPMENT_TEAM = BJBC582Q56;
 				INFOPLIST_FILE = CollectionViewSearchSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = VamshiKrishna.CollectionViewSearchSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = VamshiKrishna.CollectionViewSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -306,6 +310,7 @@
 				96291BEE1EA87C3A00E002B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

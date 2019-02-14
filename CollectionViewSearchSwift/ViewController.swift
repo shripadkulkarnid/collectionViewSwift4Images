@@ -1,16 +1,10 @@
-//
-//  ViewController.swift
-//  CollectionViewSearchSwift
-//
-//  Created by Vamshi Krishna on 20/04/17.
-//  Copyright © 2017 VamshiKrishna. All rights reserved.
-//
+
 
 
 
 import UIKit
 
-class ViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout , TapCellDelegate, UISearchBarDelegate {
+class ViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout ,UISearchBarDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionSearchBar: UISearchBar!
     var cellIdentifier = "Cell"
@@ -20,19 +14,50 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     var searchBarActive:Bool = false
     var searchBarBoundsY:CGFloat?
     var refreshControl:UIRefreshControl?
-    
+    var model:[ModelElement] = []
     var cellWidth:CGFloat{
         return collectionView.frame.size.width/2
     }
-    
+    let url = URL(string:"https://picsum.photos/list")
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         collectionSearchBar.delegate = self
         collectionView.dataSource = self
         collectionView.delegate = self
-        self.dataSource = ["Afghanistan","Albania","Algeria","Andorra","Barbados","Belarus","Belgium","Cabo Verde","Central African Republic", "Chad","Chile","Denmark","Djibouti","Eritrea","Estonia","Fiji", "Finland","Haiti","Holy See","Honduras","Iceland","India", "Japan", "Kosovo","Kuwait","Lesotho", "Liberia","Mauritius", "Mexico","Micronesia","Moldova","Namibia","Nauru","Nepal","Oman","Paraguay", "Peru","Philippines","Poland","Qatar","Russia","Senegal","Serbia","Seychelles","Sierra Leone","Tonga","Trinidad and Tobago","Tunisia","United Kingdom","Uruguay","Venezuela","Vietnam","Yemen","Zimbabwe"]
-        self.dataSourceForSearchResult = [String]()
+        urlDataRead()
+        collectionSearchBar.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        urlDataRead()
+    }
+    
+    func urlDataRead(){
+        //  To read values from URLs:
+    
+        
+        URLSession.shared.dataTask(with: url!) { (data, response
+            , error) in
+            
+            guard let data = data else{return}
+            do{
+                let decoder = JSONDecoder()
+                let getJsonData = try decoder.decode(Model.self, from: data)
+                self.model = getJsonData
+               
+               
+            }catch let err {
+                print("Err", err)
+            }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+            
+            }.resume()
+        
+        
     }
     
     // MARK: Search
@@ -86,33 +111,35 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! CollectionViewCell
-        cell.indexPath = indexPath
-        cell.delegate = self
-        cell.topButton.backgroundColor = UIColor .blue
-        cell.layer.borderWidth = 1.0;
-        cell.layer.borderColor = UIColor.green.cgColor
-        cell.topLabel.textColor = UIColor.white
-        
-        if (self.searchBarActive) {
-            cell.topLabel!.text = self.dataSourceForSearchResult![indexPath.row];
-        }else{
-            cell.topLabel!.text = self.dataSource![indexPath.row];
+        let data = model[indexPath.row]
+        cell.tag = indexPath.row
+        let urlImage = "https://picsum.photos/300/300?image=\(data.id!)"
+        let url = URL(string: urlImage)
+        DispatchQueue.global().async {
+            let dataImage = try? Data(contentsOf: url!)
+            DispatchQueue.main.async {
+                if cell.tag == indexPath.row{
+                cell.imageView.image = UIImage(data: dataImage!)
+                }
+                else{
+                    cell.imageView.image = UIImage(named: "thumbnil")
+                }
+            }
         }
+        cell.authorLbl.text = data.author
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.searchBarActive {
-            return self.dataSourceForSearchResult!.count;
-        }
-        return self.dataSource!.count
+       
+        return model.count
     }
     
     func buttonTapped(indexPath: IndexPath) {
         print("success")
     }
-    
+  
     // MARK: <UICollectionViewDelegateFlowLayout>
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
